@@ -5,7 +5,7 @@ import { registerUser } from "../../services/authService";
 import FormInput from "../../components/FormInput";
 
 interface RegisterFormData {
-  name: string;
+  username: string;
   email: string;
   password: string;
   confirmPassword: string;
@@ -16,9 +16,9 @@ const Register: React.FC = () => {
   const navigate = useNavigate();
 
   const onSubmit = async (data: RegisterFormData) => {
-    const { name, email, password } = data;
+    const { username, email, password } = data;
     try {
-      await registerUser({ name, email, password });
+      await registerUser({ username, email, password });
       alert("Registration successful! Please log in.");
       navigate("/");
     } catch (error) {
@@ -32,12 +32,12 @@ const Register: React.FC = () => {
         <h1 className="text-2xl font-bold text-center text-gray-700">Register</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <FormInput
-            id="name"
-            label="Name"
+            id="username"
+            label="User Name"
             type="text"
             placeholder="Your Name"
-            registration={register("name", { required: "Name is required" })}
-            error={errors.name}
+            registration={register("username", { required: "Name is required" })}
+            error={errors.username}
           />
           <FormInput
             id="email"

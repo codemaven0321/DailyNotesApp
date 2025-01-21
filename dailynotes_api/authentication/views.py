@@ -1,9 +1,11 @@
-from rest_framework import status, permissions
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from .serializers import UserSerializer
 from django.contrib.auth import authenticate
+from .models import CustomUser
+from django.conf import settings
 
 class RegisterView(APIView):
     def post(self, request):
@@ -15,14 +17,23 @@ class RegisterView(APIView):
 
 class LoginView(APIView):
     def post(self, request):
-        username = request.data.get('username')
+        email = request.data.get('email')
         password = request.data.get('password')
-        user = authenticate(username=username, password=password)
 
+        try:
+            user = CustomUser.objects.get(email=email)
+        except CustomUser.DoesNotExist:
+            return Response({"detail": "Invalid email or password"}, status=status.HTTP_401_UNAUTHORIZED)
+
+        # Authenticate user using the custom user model
+        print( f"User Name : {user.username}, password : {password}")
+        user = authenticate(username=user.username, password=password)
+
+        print( f"User : {user}")
         if user:
             refresh = RefreshToken.for_user(user)
             return Response({
                 'refresh': str(refresh),
                 'access': str(refresh.access_token),
             })
-        return Response({"detail": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED)
+        return Response({"detail": "Invalid email or password"}, status=status.HTTP_401_UNAUTHORIZED)

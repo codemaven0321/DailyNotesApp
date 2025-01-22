@@ -10,7 +10,7 @@ interface NoteFormProps {
 export interface NoteFormData {
   id: string;
   title: string;
-  content: string;
+  description: string;
   audioUrl?: string;
 }
 
@@ -46,17 +46,17 @@ const NoteForm: React.FC<NoteFormProps> = ({ onSubmit, initialData }) => {
       </div>
 
       <div>
-        <label htmlFor="content" className="block text-sm font-medium text-gray-600 mb-1">
-          Content
+        <label htmlFor="description" className="block text-sm font-medium text-gray-600 mb-1">
+          Description
         </label>
         <textarea
-          {...register("content", { required: "Content is required" })}
-          id="content"
-          placeholder="Note Content"
-          className={`w-full px-4 py-2 border rounded-lg text-sm focus:ring focus:ring-blue-200 focus:outline-none ${errors.content ? 'border-red-500' : 'border-gray-300'}`}
+          {...register("description", { required: "Description is required" })}
+          id="description"
+          placeholder="Note Description"
+          className={`w-full px-4 py-2 border rounded-lg text-sm focus:ring focus:ring-blue-200 focus:outline-none ${errors.description ? 'border-red-500' : 'border-gray-300'}`}
           rows={4}
         />
-        {errors.content && <p className="mt-1 text-sm text-red-500">{errors.content.message}</p>}
+        {errors.description && <p className="mt-1 text-sm text-red-500">{errors.description.message}</p>}
       </div>
 
       <div className="flex">

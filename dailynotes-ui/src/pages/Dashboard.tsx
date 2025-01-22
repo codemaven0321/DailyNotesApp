@@ -2,26 +2,31 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import NoteItem from "../components/NoteItem";
 import { fetchNotes, deleteNote } from "../services/noteService";
-import { mockData } from "../data/mockData";
 
 interface Note {
   id: string;
   title: string;
-  content: string;
+  description: string;
   audioUrl?: string;
 }
 
 const Dashboard: React.FC = () => {
   const [notes, setNotes] = useState<Note[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchAllNotes = async () => {
+      setLoading(true);
+      setError(null);
       try {
-        const response = mockData;
+        const response = await fetchNotes(); // Fetch notes from server
         setNotes(response);
-      } catch (error) {
-        alert("Failed to fetch notes");
+      } catch (err: any) {
+        setError(err.message || "Failed to fetch notes");
+      } finally {
+        setLoading(false);
       }
     };
     fetchAllNotes();
@@ -29,7 +34,7 @@ const Dashboard: React.FC = () => {
 
   const handleDelete = async (id: string) => {
     try {
-      await deleteNote(id);
+      await deleteNote(id); // Delete note on server
       setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
       alert("Note deleted successfully!");
     } catch (error) {
@@ -40,6 +45,18 @@ const Dashboard: React.FC = () => {
   const handleEdit = (id: string) => {
     navigate(`/notes/update/${id}`);
   };
+
+  if (loading) {
+    return <p className="text-center mt-10 text-blue-600">Loading notes...</p>;
+  }
+
+  if (error) {
+    return (
+      <p className="text-center mt-10 text-red-600">
+        {error}. Please try again later.
+      </p>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
@@ -59,7 +76,6 @@ const Dashboard: React.FC = () => {
                 onDelete={handleDelete}
                 onEdit={handleEdit}
               />
-              
             </div>
           ))}
         </div>

@@ -11,7 +11,7 @@ const CreateNote: React.FC = () => {
   const handleCreate = async (data: NoteFormData) => {
     const saveData = {
       title: data.title,
-      content: data.content,
+      description: data.description,
       audio: audioBlob,
     };
 

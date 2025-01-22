@@ -13,3 +13,7 @@ class NoteViewSet(viewsets.ModelViewSet):
         This ensures that users can only access their own notes.
         """
         return Note.objects.filter(user=self.request.user)
+    
+    def perform_create(self, serializer):
+        # Set the user to the currently authenticated user
+        serializer.save(user=self.request.user)

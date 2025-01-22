@@ -2,7 +2,7 @@ import React from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 
 interface NoteItemProps {
-  note: { id: string; title: string; content: string; audioUrl?: string };
+  note: { id: string; title: string; description: string; audioUrl?: string };
   onDelete: (id: string) => void;
   onEdit: (id: string) => void;
 }
@@ -10,7 +10,7 @@ interface NoteItemProps {
 const NoteItem: React.FC<NoteItemProps> = ({ note, onDelete, onEdit }) => (
   <div className="note-item bg-gray-100 p-4 rounded shadow-md">
     <h3 className="text-lg font-bold">{note.title}</h3>
-    <p className="text-gray-700">{note.content}</p>
+    <p className="text-gray-700">{note.description}</p>
     {note.audioUrl && (
       <div className="mt-4">
         <h3 className="text-md font-bold">Audio Recording</h3>

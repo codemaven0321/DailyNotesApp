@@ -25,11 +25,8 @@ class LoginView(APIView):
         except CustomUser.DoesNotExist:
             return Response({"detail": "Invalid email or password"}, status=status.HTTP_401_UNAUTHORIZED)
 
-        # Authenticate user using the custom user model
-        print( f"User Name : {user.username}, password : {password}")
         user = authenticate(username=user.username, password=password)
 
-        print( f"User : {user}")
         if user:
             refresh = RefreshToken.for_user(user)
             return Response({

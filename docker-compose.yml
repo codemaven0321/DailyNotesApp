@@ -1,0 +1,23 @@
+version: "3.8"
+services:
+  backend:
+    build:
+      context: ./dailynotes_api # Path to Django project
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./dailynotes_api:/app
+    depends_on:
+      - frontend
+
+  frontend:
+    build:
+      context: ./dailynotes-ui # Path to React project
+      dockerfile: Dockerfile
+    volumes:
+    - ./dailynotes-ui:/app
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true

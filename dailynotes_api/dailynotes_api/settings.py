@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -132,9 +133,14 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTH_USER_MODEL = 'authentication.CustomUser'
 
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+    'TEST_REQUEST_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.MultiPartRenderer', 
     ],
 }
 
@@ -156,7 +162,5 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
-
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+MEDIA_URL = '/audio_notes/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/audio_notes')

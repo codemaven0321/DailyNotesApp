@@ -5,7 +5,6 @@ const ProtectedRoute: React.FC = () => {
   const authToken = localStorage.getItem("authToken");
 
   if (!authToken) {
-    // alert("Please login!");
     return <Navigate to="/" replace />;
   }
 

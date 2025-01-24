@@ -1,0 +1,22 @@
+# Ignore node_modules (not needed as dependencies are installed in the image)
+node_modules/
+npm-debug.log
+
+# Ignore build output (will be regenerated in the container)
+build/
+
+# Ignore local environment files
+.env
+.env.local
+.env.production
+.env.*.local
+
+# Ignore logs
+*.log
+
+# Ignore IDE/editor settings
+.vscode/
+.idea/
+
+# Ignore other unnecessary files
+.DS_Store

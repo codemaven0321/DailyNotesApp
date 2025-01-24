@@ -21,7 +21,10 @@ const MenuBar: React.FC = () => {
   // Close dropdown if clicked outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsDropdownOpen(false);
       }
     };
@@ -34,7 +37,8 @@ const MenuBar: React.FC = () => {
   // Handle scrolling to show/hide the MenuBar
   useEffect(() => {
     const handleScroll = () => {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
       if (scrollTop > lastScrollTop.current) {
         // Scrolling down
         setIsVisible(false);
@@ -60,7 +64,7 @@ const MenuBar: React.FC = () => {
       <div className="container mx-auto flex justify-between items-center">
         <div>
           <Link to="/" className="text-2xl font-bold hover:text-blue-300">
-            DailyVoiceNotesApp
+            DailyNotesApp
           </Link>
         </div>
         <div>
@@ -75,10 +79,24 @@ const MenuBar: React.FC = () => {
             <div className="relative inline-block" ref={dropdownRef}>
               <button
                 onClick={toggleDropdown}
-                className="px-4 py-2 rounded-lg border-2 text-sm font-medium focus:outline-none focus:ring focus:ring-gray-300"
+                className="flex items-center gap-2 px-4 py-2 rounded-lg border-2 text-sm font-medium focus:outline-none focus:ring focus:ring-gray-300"
               >
-                Menu
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="2"
+                  stroke="currentColor"
+                  className="w-5 h-5"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3 6h18M3 12h18M3 18h18"
+                  />
+                </svg>
               </button>
+
               {isDropdownOpen && (
                 <div className="absolute right-0 mt-2 w-36 bg-white text-gray-800 rounded-lg shadow-lg z-10">
                   <Link

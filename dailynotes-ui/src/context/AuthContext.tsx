@@ -14,7 +14,7 @@ const AuthContext = createContext<AuthContextProps>({
 });
 
 interface AuthProviderProps {
-    children: ReactNode; // Define children explicitly
+    children: ReactNode;
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
@@ -23,8 +23,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem("authToken");
     if (token) {
-      // Set user based on token (decode or fetch user info from API)
-      setUser({ name: "Victor" }); // Replace with actual user fetching logic
+      setUser({ name: user.name });
     }
   }, []);
 

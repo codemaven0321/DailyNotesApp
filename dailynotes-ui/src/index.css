@@ -12,6 +12,21 @@ code {
     monospace;
 }
 
+.overflow-ellipsis {
+  white-space: nowrap;        
+  overflow: hidden;           
+  text-overflow: ellipsis;    
+}
+
+.text-multiline {
+  display: -webkit-box;       
+  -webkit-box-orient: vertical;
+  overflow: hidden;           
+  text-overflow: ellipsis;    
+  line-clamp: 3;              
+  -webkit-line-clamp: 3;      
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

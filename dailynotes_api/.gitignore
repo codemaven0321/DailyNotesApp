@@ -5,6 +5,8 @@
 __pycache__/
 *.so
 
+#media
+media/
 # Virtual Environments
 env/
 venv/

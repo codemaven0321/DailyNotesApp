@@ -7,7 +7,7 @@ interface Note {
   id: string;
   title: string;
   description: string;
-  audioUrl?: string;
+  audio_file?: string;
 }
 
 const Dashboard: React.FC = () => {
@@ -21,7 +21,7 @@ const Dashboard: React.FC = () => {
       setLoading(true);
       setError(null);
       try {
-        const response = await fetchNotes(); // Fetch notes from server
+        const response = await fetchNotes(); 
         setNotes(response);
       } catch (err: any) {
         setError(err.message || "Failed to fetch notes");
@@ -30,13 +30,16 @@ const Dashboard: React.FC = () => {
       }
     };
     fetchAllNotes();
+
   }, []);
+
+  useEffect(() => {
+  }, [notes]);
 
   const handleDelete = async (id: string) => {
     try {
-      await deleteNote(id); // Delete note on server
+      await deleteNote(id);
       setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
-      alert("Note deleted successfully!");
     } catch (error) {
       alert("Failed to delete note");
     }

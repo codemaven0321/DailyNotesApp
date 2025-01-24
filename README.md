@@ -13,8 +13,6 @@ A full-stack project with a **Django backend** and a **React frontend**, orchest
 5. [Testing](#testing)
 6. [API Endpoints](#api-endpoints)
 7. [Environment Variables](#environment-variables)
-8. [Contributing](#contributing)
-9. [License](#license)
 
 ---
 
@@ -139,25 +137,4 @@ REACT_APP_BACKEND_URL=http://localhost:8000
 
 ---
 
-## Contributing
 
-1. Fork the repository.
-2. Create a new branch:
-   ```bash
-   git checkout -b feature-name
-   ```
-3. Commit your changes:
-   ```bash
-   git commit -m "Description of changes"
-   ```
-4. Push the branch:
-   ```bash
-   git push origin feature-name
-   ```
-5. Open a pull request.
-
----
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
